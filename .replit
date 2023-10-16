@@ -1,4 +1,4 @@
-run = ["bash start.sh"]
+run = "bash start.sh"
 
 modules = ["nodejs-18:v3-20230608-f4cd419"]
 hidden = [".config", "package-lock.json"]
