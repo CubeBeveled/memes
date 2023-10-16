@@ -1,6 +1,7 @@
 @echo off
 
 :restart
+git pull origin main
 node index.js
 echo Restarting...
 
