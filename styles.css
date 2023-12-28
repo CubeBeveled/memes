@@ -7,14 +7,15 @@ body {
 }
 
 .image {
-  width: 20vh;
-  height: 20vh;
-  margin: 10px;
+  width: 40vh;
+  height: 40vh;
+  margin: 30px;
   display: inline-block;
 }
 
 .video {
-  width: 10vh;
-  margin: 10px;
+  width: 40vh;
+  height: 40vh;
+  margin: 30px;
   display: inline-block;
 }

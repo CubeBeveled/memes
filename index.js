@@ -40,12 +40,12 @@ app.get("/", (req, res) => {
       <body>
         ${
           imageFiles.map(file => 
-            `<img class="image" src="${folderName}/${file}" width="100" height="100" alt="${folderName}/${file}">`
+            `<img class="image" src="${folderName}/${file}" alt="${folderName}/${file}">`
           ).join("")
         }
         ${
           videoFiles.map(file => 
-            `<video width="320" class="video" height="240" controls>
+            `<video class="video" controls>
               <source src="${folderName}/${file}" type="video/mp4">
             </video>`
           ).join("")
