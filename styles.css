@@ -1,12 +1,10 @@
-/* public/styles.css */
-
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
   background-color: rgb(50, 50, 50);
 }
 
-.image {
+.img {
   width: 40vh;
   height: 40vh;
   margin: 30px;
@@ -18,4 +16,14 @@ body {
   height: 40vh;
   margin: 30px;
   display: inline-block;
+}
+
+.meme-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.meme-item {
+  text-align: center;
 }
