@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const port = process.env.PORT || 3000; // Use the default port or a custom one
+const port = 3000; // Use the default port or a custom one
 const folderName = "eng"
 
 // Custom middleware to log requests
