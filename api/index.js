@@ -11,7 +11,7 @@ app.get("/eng/random", (req, res) => {
   const files = fs.readdirSync("/eng");
 
   if (files.length === 0) {
-    console.log("There are no memes in the folder :(");
+    res.send("There are no memes in the folder :(");
   } else {
     res.sendFile(`../eng/${files[Math.floor(Math.random() * files.length)]}`)
   }
