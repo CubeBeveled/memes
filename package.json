@@ -1,0 +1,17 @@
+{
+  "name": "bevel-memez",
+  "version": "0.0.1",
+  "description": "the API of a collection of memes by BeveledCube",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "BeveledCube",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
