@@ -14,7 +14,7 @@ app.get("/eng/random", (req, res) => {
   if (files.length === 0) {
     res.send("There are no memes in the folder :(");
   } else {
-    res.sendFile(`../eng/${files[Math.floor(Math.random() * files.length)]}`)
+    res.sendFile(path.join(__dirname, `../eng/${files[Math.floor(Math.random() * files.length)]}`))
   }
 });
 
