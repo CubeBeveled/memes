@@ -1,1 +1,25 @@
-{ "version": 2 }
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/node_modules",
+      "destination": "/api"
+    },
+    {
+      "source": "/package.json",
+      "destination": "/api"
+    },
+    {
+      "source": "/package-lock.json",
+      "destination": "/api"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/api"
+    },
+    {
+      "source": "/vercel.json",
+      "destination": "/api"
+    }
+  ]
+}
