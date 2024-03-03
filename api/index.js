@@ -1,14 +1,14 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path")
-const app = express();
+const api = express();
 const port = 3000;
 
-app.use(express.json())
+api.use(express.json())
 
-app.get("/", (req, res) => res.sendFile("/api/main.html"));
+api.get("/", (req, res) => res.sendFile("/api/main.html"));
 
-app.get("/eng/random", (req, res) => {
+api.get("/eng/random", (req, res) => {
   const files = fs.readdirSync(path.join(__dirname, "../eng"));
 
   if (files.length === 0) {
@@ -18,6 +18,6 @@ app.get("/eng/random", (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Server ready on port ${port}.`));
+api.listen(port, () => console.log(`Server ready on port ${port}.`));
 
-module.exports = app;
+module.exports = api;
