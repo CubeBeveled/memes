@@ -9,12 +9,12 @@ api.use(express.json())
 api.get("/", (req, res) => res.sendFile("main.html"));
 
 api.get("/eng/random", (req, res) => {
-  const files = fs.readdirSync(path.join(__dirname, "eng"));
+  const files = fs.readdirSync(path.join(__dirname, "../eng"));
 
   if (files.length === 0) {
     res.send("There are no memes in the folder :(");
   } else {
-    res.sendFile(path.join(__dirname, `eng/${files[Math.floor(Math.random() * files.length)]}`))
+    res.sendFile(path.join(__dirname, `../eng/${files[Math.floor(Math.random() * files.length)]}`))
   }
 });
 
