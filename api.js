@@ -13,6 +13,7 @@ const folderBlacklist = [
   "node_modules",
   "assets"
 ];
+const bottomHtml = '<a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/icons/github.svg" class="icon"></a>';
 let folders = [];
 
 main()
@@ -58,12 +59,16 @@ async function main() {
           </head>
           <body>
             ${elements.join("")}
+            <div class="bottom-container">
+              ${bottomHtml}
+            </div>
           </body>
           </html>
         `;
         elements = [];
 
       api.get(`/${f.name}`, async (req, res) => {
+        console.log(color.gray("Requested"), "/" + f.name)
         res.send(html);
       });
     }
@@ -97,6 +102,9 @@ api.get("/", async (req, res) => {
       </head>
       <body>
         ${elements.join("")}
+        <div class="bottom-container">
+          ${bottomHtml}
+        </div>
       </body>
       </html>
     `;

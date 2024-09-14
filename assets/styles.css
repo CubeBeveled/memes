@@ -36,8 +36,7 @@ body {
 
 .icon {
   width: 2vw;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin: 0;
   padding: 0;
   vertical-align: middle;
 }
@@ -68,7 +67,7 @@ body {
   transition: all, 0.30s;
 }
 
-.compute-time {
+.bottom-container {
   position: fixed;
   bottom: 0;
   right: 0;
