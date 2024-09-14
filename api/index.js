@@ -4,13 +4,13 @@ const path = require("path");
 const fs = require("fs");
 const app = express();
 
-app.use(express.static(__dirname + "/assets")); // Server files from this folder
+app.use(express.static(__dirname)); // Server files from this folder
 const folderBlacklist = [
   ".git",
   "node_modules",
   "assets"
 ];
-const bottomHtml = '<a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/icons/github.svg" class="icon"></a>';
+const bottomHtml = '<a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg" class="icon"></a>';
 let folders = [];
 
 main()
@@ -26,7 +26,6 @@ async function main() {
       });
 
       console.log(color.yellow("Found:"), f.name)
-      app.use(express.static(__dirname + `/${f.name}`)); // Server files from this folder
 
       let elements = [];
 
@@ -34,11 +33,11 @@ async function main() {
         if (i.type == "file") {
           elements.push(
             `<div class="file-container">
-              <a href="/${i.name}" class="file">
-                <img src="/icons/${getIcon(i.name)}" class="icon">
+              <a href="/${f.name}/${i.name}" class="file">
+                <img src="/assets/icons/${getIcon(i.name)}" class="icon">
                 ${i.name}
               </a>
-              <a href="/${i.name}" class="file" download>
+              <a href="/${f.name}/${i.name}" class="file" download>
                 <button class="button">Download</button>
               </a>
             </div>`
@@ -52,7 +51,7 @@ async function main() {
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" href="/styles.css"/>
+            <link rel="stylesheet" type="text/css" href="/assets/styles.css"/>
             
             <script>
               window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -86,8 +85,8 @@ app.get("/", async (req, res) => {
   for (const i of folders) {
     elements.push(
       `<div class="file-container">
-        <a href="${i.name}" class="file">
-          <img src="/icons/folder.svg" class="icon">
+        <a href="/${i.name}" class="file">
+          <img src="/assets/icons/folder.svg" class="icon">
           ${i.name}
         </a>
       </div>`
@@ -100,7 +99,7 @@ app.get("/", async (req, res) => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/styles.css"/>
 
         <script>
           window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
