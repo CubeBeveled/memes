@@ -5,7 +5,6 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "assets"))); // Server files from this folder
-app.use(express.static(path.join(__dirname, "memes")));
 
 const folderBlacklist = [
   ".git",
@@ -27,7 +26,7 @@ async function main() {
         files: content
       });
 
-      app.use(express.static(path.join(__dirname, `../${f.name}`))); // Server files from this folder
+      app.use(express.static(path.join(__dirname, `${f.name}`))); // Server files from this folder
 
       let elements = [];
 
