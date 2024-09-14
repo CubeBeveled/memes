@@ -1,12 +1,13 @@
 
 const express = require("express");
+const color = require("colors");
+const path = require("path");
 const fs = require("fs");
 const app = express();
-const color = require("colors")
 const port = 3000;
 
 app.use(express.json())
-app.use(express.static(__dirname + "/assets")); // Server files from this folder
+app.use(express.static(path.join(__dirname, "../assets"))); // Server files from this folder
 
 const folderBlacklist = [
   ".git",
@@ -28,7 +29,7 @@ async function main() {
         files: content
       });
 
-      app.use(express.static(__dirname + "/" + f.name)); // Server files from this folder
+      app.use(express.static(path.join(__dirname, `../${f.name}`))); // Server files from this folder
 
       let elements = [];
 
