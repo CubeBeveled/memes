@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const app = express();
 
-app.use(express.static(path.join(__dirname, "assets"))); // Server files from this folder
+app.use(express.static(path.join(__dirname, "api/assets"))); // Server files from this folder
 
 const folderBlacklist = [
   ".git",
@@ -16,7 +16,7 @@ let folders = [];
 
 main()
 async function main() {
-  for (const f of await getContents(".")) {
+  for (const f of await getContents("api")) {
     if (f.type == "dir" && !folderBlacklist.includes(f.name)) {
       const content = await getContents(f.name);
       let html;
@@ -26,7 +26,7 @@ async function main() {
         files: content
       });
 
-      app.use(express.static(path.join(__dirname, `${f.name}`))); // Server files from this folder
+      app.use(express.static(path.join(__dirname, `api/${f.name}`))); // Server files from this folder
 
       let elements = [];
 
