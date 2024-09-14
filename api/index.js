@@ -18,7 +18,7 @@ main()
 async function main() {
   for (const f of await getContents("api")) {
     if (f.type == "dir" && !folderBlacklist.includes(f.name)) {
-      const content = await getContents(f.name);
+      const content = await getContents("api/" + f.name);
       let html;
 
       folders.push({
