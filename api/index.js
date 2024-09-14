@@ -26,6 +26,7 @@ async function main() {
         files: content
       });
 
+     console.log(color.yellow("Found:"), f.name)
       app.use(express.static(path.join(__dirname, `api/${f.name}`))); // Server files from this folder
 
       let elements = [];
