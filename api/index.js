@@ -4,8 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const app = express();
 
-app.use(express.static(__dirname + "/api/assets")); // Server files from this folder
-
+app.use(express.static(__dirname + "/assets")); // Server files from this folder
 const folderBlacklist = [
   ".git",
   "node_modules",
@@ -27,7 +26,7 @@ async function main() {
       });
 
       console.log(color.yellow("Found:"), f.name)
-      app.use(express.static(__dirname + `api/${f.name}`)); // Server files from this folder
+      app.use(express.static(__dirname + `/${f.name}`)); // Server files from this folder
 
       let elements = [];
 
