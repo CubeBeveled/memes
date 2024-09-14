@@ -1,12 +1,12 @@
 
 const express = require("express");
 const fs = require("fs");
-const api = express();
+const app = express();
 const color = require("colors")
 const port = 3000;
 
-api.use(express.json())
-api.use(express.static(__dirname + "/assets")); // Server files from this folder
+app.use(express.json())
+app.use(express.static(__dirname + "/assets")); // Server files from this folder
 
 const folderBlacklist = [
   ".git",
@@ -28,7 +28,7 @@ async function main() {
         files: content
       });
 
-      api.use(express.static(__dirname + "/" + f.name)); // Server files from this folder
+      app.use(express.static(__dirname + "/" + f.name)); // Server files from this folder
 
       let elements = [];
 
@@ -72,7 +72,7 @@ async function main() {
         `;
         elements = [];
 
-      api.get(`/${f.name}`, async (req, res) => {
+      app.get(`/${f.name}`, async (req, res) => {
         console.log(color.gray("Requested"), "/" + f.name)
         res.send(html);
       });
@@ -80,7 +80,7 @@ async function main() {
   }
 }
 
-api.get("/", async (req, res) => {
+app.get("/", async (req, res) => {
   let elements = [];
 
   console.log(color.gray("Requested"), "/")
@@ -306,6 +306,6 @@ function getIcon(fileName) {
   }
 }
 
-api.listen(port, () => console.log(`Server ready on port ${port}`));
+app.listen(port, () => console.log(`Server ready on port ${port}`));
 
-module.exports = api;
+module.exports = app;
