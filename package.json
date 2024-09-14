@@ -1,0 +1,25 @@
+{
+  "name": "memes-api",
+  "version": "0.0.5",
+  "description": "An api to list memes",
+  "main": "api.js",
+  "scripts": {
+    "test": "node api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CubeBeveled/memes.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Beveled Cube",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CubeBeveled/memes/issues"
+  },
+  "homepage": "https://github.com/CubeBeveled/memes#readme",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
