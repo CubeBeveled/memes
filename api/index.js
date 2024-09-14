@@ -55,7 +55,12 @@ async function main() {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" type="text/css" href="/styles.css"/>
-            <title>Files</title>
+            
+            <script>
+              window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            </script>
+            <script defer src="/_vercel/insights/script.js"></script>
+            <title>Memes - ${f.name}</title>
           </head>
           <body>
             ${elements.join("")}
@@ -98,7 +103,13 @@ api.get("/", async (req, res) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/styles.css"/>
-        <title>Files</title>
+
+        <script>
+          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
+        
+        <title>Memes - Categories</title>
       </head>
       <body>
         ${elements.join("")}
