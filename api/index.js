@@ -3,9 +3,7 @@ const color = require("colors");
 const path = require("path");
 const fs = require("fs");
 const app = express();
-const port = 3000;
 
-app.use(express.json())
 app.use(express.static(path.join(__dirname, "../assets"))); // Server files from this folder
 
 const folderBlacklist = [
@@ -306,6 +304,6 @@ function getIcon(fileName) {
   }
 }
 
-app.listen(port, () => console.log(`Server ready on port ${port}`));
+app.listen(3000, () => console.log(`Server ready on port 3000`));
 
 module.exports = app;
