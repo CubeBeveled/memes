@@ -1,4 +1,9 @@
 {
   "version": 2,
-  "redirects": []
+  "rewrites": [
+     {
+        "source": "/(*.)",
+        "destination": "/api"
+     }
+  ]
 }
