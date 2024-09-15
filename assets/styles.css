@@ -1,8 +1,14 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+
 body {
   font-family: Arial, sans-serif;
   color: rgb(241, 241, 241);
   background-color: rgb(33, 33, 33);
 }
+
 
 .file-container {
   display: inline-block;
@@ -36,9 +42,23 @@ body {
 
 .icon {
   width: 2vw;
+  margin: 5px;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.bottom-icon {
+  width: 2vw;
   margin: 0;
   padding: 0;
   vertical-align: middle;
+}
+
+.meme-container {
+  display: block;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 10px;
 }
 
 .button {
@@ -77,4 +97,8 @@ body {
   border-radius: 10px;
   background-color: rgba(117, 117, 117, 0.349);
   color: rgb(145, 145, 145);
+}
+
+.dim-text {
+  color: rgb(167, 167, 167);
 }

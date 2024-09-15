@@ -2,13 +2,214 @@
 <html lang="en">
 
 <head>
-  <title>Meme Explorer</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/assets/styles.css" />
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <title>Meme explorer</title>
 </head>
 
 <body>
-  <h1 class="text">Hello there!</h1>
-  <span class="text">website on vercel is a nightmare</span>
+  <div id="categories"></div>
+  <div class="bottom-container">
+    <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg"
+        class="bottom-icon"></a>
+  </div>
 </body>
+
+<script>
+  const folderBlacklist = [
+    "assets",
+    ".gitignore",
+    "index.html",
+    "package.json",
+    "api.js"
+  ];
+
+  main()
+  async function main() {
+    await fetch("https://api.github.com/repos/CubeBeveled/memes/contents")
+      .then(res => res.json())
+      .then(content => {
+        content = content.filter(i => !folderBlacklist.includes(i.name));
+
+        for (const i of content) {
+          const categoryContainer = document.getElementById("categories");
+          const categoryElement = document.createElement("div");
+          categoryElement.classList.add("file-container");
+
+          categoryElement.innerHTML = `<span class="file"> <img src="/assets/icons/folder.svg" class="icon"> ${i.name}</span>`;
+
+          let categoryOpen = false;
+          let memes;
+          categoryElement.addEventListener("click", async () => {
+            console.log(`Category ${i.name} clicked (${categoryOpen})`)
+            if (categoryOpen) {
+              categoryOpen = false;
+
+              const previousMemes = document.querySelectorAll(".meme-container");
+              previousMemes.forEach(meme => meme.remove());
+            } else {
+              categoryOpen = true;
+              if (memes) {
+                memes.forEach(m => {
+                  const memeElement = document.createElement("div");
+                  memeElement.classList.add("meme-container");
+                  memeElement.innerHTML = `<a href="/${i.name}/${m.name}", target="_blank"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
+                  categoryElement.appendChild(memeElement);
+                });
+              } else {
+                await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${i.name}`)
+                  .then(res => res.json())
+                  .then(memes => {
+                    memes.forEach(m => {
+                      const memeElement = document.createElement("div");
+                      memeElement.classList.add("meme-container");
+                      memeElement.innerHTML = `<a href="/${i.name}/${m.name}", target="_blank"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
+                      categoryElement.appendChild(memeElement);
+                    });
+                  });
+              }
+            }
+          });
+
+          categoryContainer.appendChild(categoryElement);
+        }
+      });
+
+    function getExtension(fileName) {
+      const fileSplit = fileName.split(".")
+      return fileSplit[fileSplit.length - 1]
+    }
+
+    function getName(fileName) {
+      const fileSplit = fileName.split(".")
+      return fileSplit.splice(0, 1)
+    }
+
+    function getIcon(fileName) {
+      const fileExtension = getExtension(fileName)
+
+      const fileExtensions = {
+        text: [
+          "txt",
+          "asc",
+        ],
+        code: [
+          "js",
+          "ts",
+          "py",
+          "html",
+          "css",
+          "lua",
+          "go",
+          "java",
+          "c",
+          "cpp",
+          "h",
+          "php",
+          "sql",
+          "ipy"
+        ],
+        config: [
+          "dat",
+          "dll",
+          "editorconfig",
+          "eslintrc",
+          "conf",
+          "gitignore"
+        ],
+        data: [
+          "log",
+          "csv",
+          "json",
+          "sqlite",
+          "db"
+        ],
+        video: [
+          "mp4",
+          "m4v",
+          "m4p",
+          "mkv",
+          "mpv",
+          "mp2",
+          "mpg",
+          "mpeg",
+          "mov",
+          "qt",
+          "avi",
+          "wmv",
+          "webm",
+          "flv",
+          "swf",
+          "avchd",
+          "3gp",
+          "mpe"
+        ],
+        images: [
+          "png",
+          "jpg",
+          "jpeg",
+          "webp",
+          "gif",
+          "png",
+          "tiff",
+          "bmp",
+          "tmp",
+          "eps",
+          "svg",
+          "psd",
+          "raw",
+          "ai"
+        ],
+        sound: [
+          "ogg",
+          "asf",
+          "aiff",
+          "flac",
+          "alac",
+          "mid",
+          "midi",
+          "aac",
+          "acc",
+          "mp3",
+          "ac3",
+          "mp2",
+          "vqf",
+          "qt",
+          "waf",
+          "wav",
+          "ra",
+          "pcm",
+          "cda",
+          "wma"
+        ]
+      }
+
+      if (fileExtensions.text.some(ext => ext == fileExtension)) {
+        return "text.svg"
+      } else if (fileExtensions.code.some(ext => ext == fileExtension)) {
+        return "code.svg"
+      } else if (fileExtensions.config.some(ext => ext == fileExtension)) {
+        return "config.svg"
+      } else if (fileExtensions.data.some(ext => ext == fileExtension)) {
+        return "data.svg"
+      } else if (fileExtensions.video.some(ext => ext == fileExtension)) {
+        return "video.svg"
+      } else if (fileExtensions.images.some(ext => ext == fileExtension)) {
+        return "image.svg"
+      } else if (fileExtensions.sound.some(ext => ext == fileExtension)) {
+        return "sound.svg"
+      } else {
+        console.log(color.yellow("File extension not recognized:"), fileExtension)
+        return "file.svg"
+      }
+    }
+  }
+</script>
 
 </html>
