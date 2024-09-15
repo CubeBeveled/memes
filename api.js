@@ -1,6 +1,5 @@
 const express = require("express");
 const color = require("colors");
-const path = require("path");
 const fs = require("fs");
 const app = express();
 
@@ -15,9 +14,9 @@ let folders = [];
 
 main()
 async function main() {
-  for (const f of await getContents("api")) {
+  for (const f of await getContents(".")) {
     if (f.type == "dir" && !folderBlacklist.includes(f.name)) {
-      const content = await getContents("api/" + f.name);
+      const content = await getContents(f.name);
       let html;
 
       folders.push({
