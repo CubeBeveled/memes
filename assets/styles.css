@@ -55,10 +55,17 @@ body {
 }
 
 .meme-container {
-  display: block;
   padding: 5px;
   margin: 10px;
+}
+
+.meme {
   border-radius: 10px;
+  display: block;
+}
+
+.meme:hover {
+  background-color: rgba(117, 117, 117, 0.349);
 }
 
 .button {

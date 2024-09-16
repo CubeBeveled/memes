@@ -32,7 +32,6 @@
       .then(res => res.json())
       .then(content => {
         content = content.filter(i => !folderBlacklist.includes(i.name));
-
         for (const i of content) {
           const categoryContainer = document.getElementById("categories");
           const categoryElement = document.createElement("div");
@@ -41,9 +40,9 @@
           categoryElement.innerHTML = `<span class="file"> <img src="/assets/icons/folder.svg" class="icon"> ${i.name}</span>`;
 
           let categoryOpen = false;
-          let memes;
+          let memesCache;
+
           categoryElement.addEventListener("click", async () => {
-            console.log(`Category ${i.name} clicked (${categoryOpen})`)
             if (categoryOpen) {
               categoryOpen = false;
 
@@ -51,25 +50,27 @@
               previousMemes.forEach(meme => meme.remove());
             } else {
               categoryOpen = true;
-              if (memes) {
-                memes.forEach(m => {
-                  const memeElement = document.createElement("div");
-                  memeElement.classList.add("meme-container");
-                  memeElement.innerHTML = `<a href="/${i.name}/${m.name}", target="_blank"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
-                  categoryElement.appendChild(memeElement);
+              const memeElement = document.createElement("div");
+              memeElement.classList.add("meme-container");
+              memeElement.innerHTML = "";
+              
+              if (memesCache) {
+                memesCache.forEach(m => {
+                  memeElement.innerHTML = `${memeElement.innerHTML}<a href="/${i.name}/${m.name}", target="_blank", class="meme"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
                 });
               } else {
                 await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${i.name}`)
                   .then(res => res.json())
                   .then(memes => {
+                    memesCache = memes;
+
                     memes.forEach(m => {
-                      const memeElement = document.createElement("div");
-                      memeElement.classList.add("meme-container");
-                      memeElement.innerHTML = `<a href="/${i.name}/${m.name}", target="_blank"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
-                      categoryElement.appendChild(memeElement);
+                      memeElement.innerHTML = `${memeElement.innerHTML}<a href="/${i.name}/${m.name}", target="_blank", class="meme"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
                     });
                   });
               }
+
+              categoryElement.appendChild(memeElement);
             }
           });
 
