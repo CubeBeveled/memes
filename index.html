@@ -35,9 +35,9 @@
         for (const i of content) {
           const categoryContainer = document.getElementById("categories");
           const categoryElement = document.createElement("div");
-          categoryElement.classList.add("file-container");
+          categoryElement.classList.add("categories-container");
 
-          categoryElement.innerHTML = `<span class="file"> <img src="/assets/icons/folder.svg" class="icon"> ${i.name}</span>`;
+          categoryElement.innerHTML = `<div class="category"> <img src="/assets/icons/folder.svg" class="icon"> ${i.name}</div>`;
 
           let categoryOpen = false;
           let memesCache;
@@ -46,17 +46,20 @@
             if (categoryOpen) {
               categoryOpen = false;
 
-              const previousMemes = document.querySelectorAll(".meme-container");
+              const previousMemes = document.querySelectorAll(".meme");
               previousMemes.forEach(meme => meme.remove());
             } else {
               categoryOpen = true;
-              const memeElement = document.createElement("div");
-              memeElement.classList.add("meme-container");
-              memeElement.innerHTML = "";
-              
+
               if (memesCache) {
                 memesCache.forEach(m => {
-                  memeElement.innerHTML = `${memeElement.innerHTML}<a href="/${i.name}/${m.name}", target="_blank", class="meme"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
+                  const memeElement = document.createElement("a");
+                  memeElement.classList.add("meme");
+                  memeElement.target = "_blank"
+                  memeElement.href = `/${i.name}/${m.name}`;
+                  memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
+
+                  categoryElement.appendChild(memeElement);
                 });
               } else {
                 await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${i.name}`)
@@ -64,13 +67,18 @@
                   .then(memes => {
                     memesCache = memes;
 
-                    memes.forEach(m => {
-                      memeElement.innerHTML = `${memeElement.innerHTML}<a href="/${i.name}/${m.name}", target="_blank", class="meme"><img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span></a>`;
+                    memesCache.forEach(m => {
+                      const memeElement = document.createElement("a");
+                      memeElement.classList.add("meme");
+                      memeElement.target = "_blank"
+                      memeElement.href = `/${i.name}/${m.name}`;
+                      memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
+
+                      categoryElement.appendChild(memeElement);
                     });
                   });
               }
 
-              categoryElement.appendChild(memeElement);
             }
           });
 

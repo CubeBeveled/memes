@@ -10,34 +10,31 @@ body {
 }
 
 
-.file-container {
+.categories-container {
   display: inline-block;
   padding: 5px;
   margin: 10px;
   border-radius: 10px;
-
-  outline-width: 0;
-  transition: 1s, all;
 }
 
-.file-container:hover {
-  outline-style: solid;
-  outline-width: 2px;
-  outline-color: rgba(179, 179, 179, 0.895);
-}
-
-.file {
+.category {
   color: rgb(222, 222, 222);
   cursor: pointer;
-  text-decoration: none;  
+  text-decoration: none;
+  padding: 5px;
+  padding-right: 10px;
   margin: 10px;
   width: fit-content;
   height: fit-content;
+
+  border-radius: 10px;
+  outline-width: 0;
 }
 
-.file:hover {
-  color: white;
-  cursor: pointer;
+.category:hover {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: rgba(179, 179, 179, 0.895);
 }
 
 .icon {
@@ -54,14 +51,23 @@ body {
   vertical-align: middle;
 }
 
-.meme-container {
+.meme {
+  display: block;
   padding: 5px;
   margin: 10px;
+  
+  width: fit-content;
+
+  border-radius: 10px;
+  border-left-color: #bebebe;
+  border-left-style: solid;
+  border-left-width: 2px;
+
+  transition: border-left-color, 0.35s;
 }
 
-.meme {
-  border-radius: 10px;
-  display: block;
+.meme:hover {
+  border-left-color: #fff;
 }
 
 .meme:hover {
