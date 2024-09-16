@@ -10,7 +10,6 @@
 </head>
 
 <body>
-  <div id="categories"></div>
   <div class="bottom-container">
     <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg"
         class="bottom-icon"></a>
@@ -26,18 +25,20 @@
     "api.js"
   ];
 
-  main()
+  main();
   async function main() {
     await fetch("https://api.github.com/repos/CubeBeveled/memes/contents")
       .then(res => res.json())
       .then(content => {
         content = content.filter(i => !folderBlacklist.includes(i.name));
         for (const i of content) {
-          const categoryContainer = document.getElementById("categories");
+          const categoryContainerElement = document.createElement("div");
           const categoryElement = document.createElement("div");
-          categoryElement.classList.add("categories-container");
 
-          categoryElement.innerHTML = `<div class="category"> <img src="/assets/icons/folder.svg" class="icon"> ${i.name}</div>`;
+          categoryElement.classList.add("category");
+          categoryContainerElement.classList.add("category-container");
+
+          categoryElement.innerHTML = `<img src="/assets/icons/folder.svg" class="icon"> ${i.name}`;
 
           let categoryOpen = false;
           let memesCache;
@@ -59,7 +60,7 @@
                   memeElement.href = `/${i.name}/${m.name}`;
                   memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
 
-                  categoryElement.appendChild(memeElement);
+                  categoryContainerElement.appendChild(memeElement);
                 });
               } else {
                 await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${i.name}`)
@@ -74,7 +75,7 @@
                       memeElement.href = `/${i.name}/${m.name}`;
                       memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
 
-                      categoryElement.appendChild(memeElement);
+                      categoryContainerElement.appendChild(memeElement);
                     });
                   });
               }
@@ -82,7 +83,8 @@
             }
           });
 
-          categoryContainer.appendChild(categoryElement);
+          categoryContainerElement.appendChild(categoryElement)
+          document.body.appendChild(categoryContainerElement);
         }
       });
 
