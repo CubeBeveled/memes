@@ -68,7 +68,7 @@
                   .then(memes => {
                     memesCache = memes;
 
-                    categoryElement.innerHTML = categoryElement.innerHTML + ` [ ${memesCache.length} ]`
+                    categoryElement.innerHTML = categoryElement.innerHTML + ` <span class="dim-text">[ ${memesCache.length} ]</span>`;
 
                     memesCache.forEach(m => {
                       const memeElement = document.createElement("a");
