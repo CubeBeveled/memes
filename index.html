@@ -31,14 +31,15 @@
       .then(res => res.json())
       .then(content => {
         content = content.filter(i => !folderBlacklist.includes(i.name));
-        for (const i of content) {
+
+        for (const cat of content) {
           const categoryContainerElement = document.createElement("div");
           const categoryElement = document.createElement("div");
 
-          categoryElement.classList.add("category");
+          categoryElement.classList.add("category-button");
           categoryContainerElement.classList.add("category-container");
 
-          categoryElement.innerHTML = `<img src="/assets/icons/folder.svg" class="icon"> ${i.name}`;
+          categoryElement.innerHTML = `<img src="/assets/icons/folder.svg" class="icon"> ${cat.name}`;
 
           let categoryOpen = false;
           let memesCache;
@@ -53,29 +54,29 @@
               categoryOpen = true;
 
               if (memesCache) {
-                memesCache.forEach(m => {
+                memesCache.forEach(meme => {
                   const memeElement = document.createElement("a");
                   memeElement.classList.add("meme");
                   memeElement.target = "_blank"
-                  memeElement.href = `/${i.name}/${m.name}`;
-                  memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
+                  memeElement.href = `/${cat.name}/${meme.name}`;
+                  memeElement.innerHTML = `<img src="/assets/icons/${getIcon(meme.name)}" class="icon">${getName(meme.name)}<span class="dim-text">.${getExtension(meme.name)}</span>`;
 
                   categoryContainerElement.appendChild(memeElement);
                 });
               } else {
-                await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${i.name}`)
+                await fetch(`https://api.github.com/repos/CubeBeveled/memes/contents/${cat.name}`)
                   .then(res => res.json())
                   .then(memes => {
                     memesCache = memes;
 
                     categoryElement.innerHTML = categoryElement.innerHTML + ` <span class="dim-text">[ ${memesCache.length} ]</span>`;
 
-                    memesCache.forEach(m => {
+                    memesCache.forEach(meme => {
                       const memeElement = document.createElement("a");
                       memeElement.classList.add("meme");
                       memeElement.target = "_blank"
-                      memeElement.href = `/${i.name}/${m.name}`;
-                      memeElement.innerHTML = `<img src="/assets/icons/${getIcon(m.name)}" class="icon">${getName(m.name)}<span class="dim-text">.${getExtension(m.name)}</span>`;
+                      memeElement.href = `/${cat.name}/${meme.name}`;
+                      memeElement.innerHTML = `<img src="/assets/icons/${getIcon(meme.name)}" class="icon">${getName(meme.name)}<span class="dim-text">.${getExtension(meme.name)}</span>`;
 
                       categoryContainerElement.appendChild(memeElement);
                     });
@@ -96,8 +97,8 @@
     }
 
     function getName(fileName) {
-      const fileSplit = fileName.split(".")
-      return fileSplit.splice(0, 1)
+      const lastDotIndex = fileName.lastIndexOf(".");
+      return fileName.substring(0, lastDotIndex); // Extract everything before the last dot
     }
 
     function getIcon(fileName) {
@@ -215,7 +216,7 @@
       } else if (fileExtensions.sound.some(ext => ext == fileExtension)) {
         return "sound.svg"
       } else {
-        console.log(color.yellow("File extension not recognized:"), fileExtension)
+        console.log("File extension not recognized:", fileExtension)
         return "file.svg"
       }
     }
