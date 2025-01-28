@@ -25,12 +25,13 @@ body {
 }
 
 .media-summary {
+  margin-left: 20px;
   font-size: larger;
   line-height: 130%;
 }
 
 .media-summary:hover {
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .icon {
@@ -77,9 +78,6 @@ body {
 
 .meme:hover {
   border-left-color: #fff;
-}
-
-.meme:hover {
   background-color: rgba(117, 117, 117, 0.349);
 }
 
