@@ -9,8 +9,7 @@ body {
   background-color: rgb(33, 33, 33);
 }
 
-
-.category-container {
+.category {
   display: inline-block;
   vertical-align: top;
   margin: 10px;
@@ -20,18 +19,18 @@ body {
   height: fit-content;
 }
 
-.category-button {
+.media-details {
   cursor: pointer;
-  border-radius: 10px;
-  outline-width: 0;
-
-  padding-right: 10px;
+  user-select: none;
 }
 
-.category-button:hover {
-  outline-style: solid;
-  outline-width: 2px;
-  outline-color: rgba(179, 179, 179, 0.895);
+.media-summary {
+  font-size: larger;
+  line-height: 130%;
+}
+
+.media-summary:hover {
+  font-weight:bold;
 }
 
 .icon {
