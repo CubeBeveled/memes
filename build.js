@@ -1,7 +1,6 @@
 import fs from "fs";
 import { getContents, ignoredDirs, getIcon, getExtension, getName } from './data.js';
 
-const originalHtml = fs.readFileSync("index.html").toString();
 const header = `<!DOCTYPE html>
 <html lang="en">
 
