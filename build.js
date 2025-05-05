@@ -2,7 +2,16 @@ import fs from "fs";
 import { getContents, ignoredDirs, getIcon, getExtension, getName } from './data.js';
 
 const originalHtml = fs.readFileSync("index.html").toString();
-const header = originalHtml.substring(originalHtml.indexOf("<head>"), originalHtml.indexOf("</head>"));
+const header = `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/assets/styles.css" />
+
+  <title>Meme explorer</title>
+</head>`;
 
 const analytics = `<script>
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
