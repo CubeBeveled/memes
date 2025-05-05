@@ -15,7 +15,8 @@ const header = `<!DOCTYPE html>
 const analytics = `<script>
 window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
-<script defer src="/_vercel/insights/script.js"></script>`;
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="554afbee-8e2f-499c-98e9-47b3b7876f44"></script>`;
 const githubLink = `<div class="bottom-container">
   <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg" class="bottom-icon"></a>
 </div>`;
