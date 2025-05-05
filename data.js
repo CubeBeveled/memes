@@ -3,6 +3,7 @@ import fs from "fs";
 export const ignoredDirs = [
   ".gitignore",
   ".git",
+  ".vercel",
   "node_modules",
   "assets",
   "index.html",

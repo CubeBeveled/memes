@@ -52,7 +52,7 @@ for (const category of await getContents(".")) {
       memesList.forEach((meme) =>
         memesHTML += `<a class="meme" target="_blank" href="${meme.category}/${meme.name}">
       <img src="/assets/icons/${getIcon(meme.name)}" class="icon">
-      ${getName(meme.name)}<span class="dim-text">${getExtension(meme.name)}</span>
+      ${getName(meme.name)}<span class="dim-text">.${getExtension(meme.name)}</span>
       </a>`
       )
 
