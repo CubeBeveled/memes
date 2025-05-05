@@ -16,21 +16,15 @@
   </div>
 </body>
 
-<script>
-  const folderBlacklist = [
-    "assets",
-    ".gitignore",
-    "index.html",
-    "package.json",
-    "api.js"
-  ];
+<script type="module">
+  import { ignoredDirs, getIcon, getName, getExtension } from './data.js';
 
   main();
   async function main() {
     await fetch("https://api.github.com/repos/CubeBeveled/memes/contents")
       .then(res => res.json())
       .then(async content => {
-        content = content.filter(i => !folderBlacklist.includes(i.name));
+        content = content.filter(i => !ignoredDirs.includes(i.name));
 
         for (const cat of content) {
           const categoryElement = document.createElement("div");
@@ -75,136 +69,6 @@
           document.body.appendChild(categoryElement);
         }
       });
-
-    function getExtension(fileName) {
-      const fileSplit = fileName.split(".")
-      return fileSplit[fileSplit.length - 1]
-    }
-
-    function getName(fileName) {
-      const lastDotIndex = fileName.lastIndexOf(".");
-      return fileName.substring(0, lastDotIndex); // Extract everything before the last dot
-    }
-
-    function getIcon(fileName) {
-      const fileExtension = getExtension(fileName).toLowerCase();
-
-      const fileExtensions = {
-        text: [
-          "txt",
-          "asc",
-        ],
-        code: [
-          "js",
-          "ts",
-          "py",
-          "html",
-          "css",
-          "lua",
-          "go",
-          "java",
-          "c",
-          "cpp",
-          "h",
-          "php",
-          "sql",
-          "ipy"
-        ],
-        config: [
-          "dat",
-          "dll",
-          "editorconfig",
-          "eslintrc",
-          "conf",
-          "gitignore"
-        ],
-        data: [
-          "log",
-          "csv",
-          "json",
-          "sqlite",
-          "db"
-        ],
-        video: [
-          "mp4",
-          "m4v",
-          "m4p",
-          "mkv",
-          "mpv",
-          "mp2",
-          "mpg",
-          "mpeg",
-          "mov",
-          "qt",
-          "avi",
-          "wmv",
-          "webm",
-          "flv",
-          "swf",
-          "avchd",
-          "3gp",
-          "mpe",
-          "qt"
-        ],
-        images: [
-          "png",
-          "jpg",
-          "jpeg",
-          "webp",
-          "gif",
-          "png",
-          "tiff",
-          "bmp",
-          "tmp",
-          "eps",
-          "svg",
-          "psd",
-          "raw",
-          "ai"
-        ],
-        sound: [
-          "ogg",
-          "asf",
-          "aiff",
-          "flac",
-          "alac",
-          "mid",
-          "midi",
-          "aac",
-          "acc",
-          "mp3",
-          "ac3",
-          "mp2",
-          "vqf",
-          "qt",
-          "waf",
-          "wav",
-          "ra",
-          "pcm",
-          "cda",
-          "wma"
-        ]
-      }
-
-      if (fileExtensions.text.some(ext => ext == fileExtension)) {
-        return "text.svg"
-      } else if (fileExtensions.code.some(ext => ext == fileExtension)) {
-        return "code.svg"
-      } else if (fileExtensions.config.some(ext => ext == fileExtension)) {
-        return "config.svg"
-      } else if (fileExtensions.data.some(ext => ext == fileExtension)) {
-        return "data.svg"
-      } else if (fileExtensions.video.some(ext => ext == fileExtension)) {
-        return "video.svg"
-      } else if (fileExtensions.images.some(ext => ext == fileExtension)) {
-        return "image.svg"
-      } else if (fileExtensions.sound.some(ext => ext == fileExtension)) {
-        return "sound.svg"
-      } else {
-        console.log("File extension not recognized:", fileExtension)
-        return "file.svg"
-      }
-    }
   }
 </script>
 
