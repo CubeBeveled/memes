@@ -11,11 +11,11 @@ body {
 
 .category {
   display: inline-block;
+
   vertical-align: top;
   margin: 10px;
   border-radius: 10px;
 
-  width: fit-content;
   height: fit-content;
 }
 
@@ -35,29 +35,31 @@ body {
 }
 
 .icon {
-  width: 5%;
-  margin: 5px;
-  padding: 0;
-  vertical-align: middle;
-}
+  width: 2.5em;
 
-.bottom-icon {
-  width: 2vw;
-  margin: 0;
+  margin: 5px;
   padding: 0;
   vertical-align: middle;
 }
 
 .bottom-container {
   position: fixed;
+
   bottom: 0;
   right: 0;
+
   margin: 10px;
   padding: 10px;
-  text-align: right;
+
   border-radius: 10px;
-  background-color: rgba(117, 117, 117, 0.349);
-  color: rgb(145, 145, 145);
+}
+
+.bottom-icon {
+  width: 2.5em;
+  margin: 0;
+  padding: 0;
+
+  vertical-align: middle;
 }
 
 .meme {
@@ -69,7 +71,7 @@ body {
   width: fit-content;
 
   border-radius: 10px;
-  border-left-color: #bebebe;
+  border-left-color: #ffffff94;
   border-left-style: solid;
   border-left-width: 2px;
 
@@ -79,6 +81,8 @@ body {
 .meme:hover {
   border-left-color: #fff;
   background-color: rgba(117, 117, 117, 0.349);
+  border-left-width: 7px;
+  transform: translate(5px);
 }
 
 .dim-text {

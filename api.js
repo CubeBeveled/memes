@@ -1,21 +1,18 @@
-const express = require("express");
-const color = require("colors");
-const fs = require("fs");
+import express from "express";
+import color from "colors";
+import { getContents, ignoredDirs } from "./data";
 const app = express();
 
 app.use(express.static(__dirname)); // Server files from this folder
-const folderBlacklist = [
-  ".git",
-  "node_modules",
-  "assets"
-];
 const bottomHtml = '<a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg" class="icon"></a>';
 let folders = [];
 
 main()
 async function main() {
   for (const f of await getContents(".")) {
-    if (f.type == "dir" && !folderBlacklist.includes(f.name)) {
+    if (ignoredDirs.includes(f.name)) continue;
+
+    if (f.type == "dir") {
       const content = await getContents(f.name);
       let html;
 
@@ -118,189 +115,6 @@ app.get("/", async (req, res) => {
 
   res.send(html);
 });
-
-// Function to get the contents of a folder
-function getContents(directoryPath) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(directoryPath, { withFileTypes: true }, (err, entries) => {
-      if (err) {
-        reject(err);
-      } else {
-        let result = [];
-
-        entries.forEach(async (entry) => {
-          if (entry.isDirectory()) {
-            result.push({
-              name: entry.name,
-              type: "dir",
-            });
-          } else {
-            result.push({
-              name: entry.name,
-              type: "file",
-            });
-          }
-        });
-
-        resolve(result);
-      }
-    });
-  });
-}
-
-function getIcon(fileName) {
-  fileName = fileName.toLowerCase();
-  const fileSplit = fileName.split(".")
-  const fileExtension = fileSplit[fileSplit.length - 1]
-
-  const fileExtensions = {
-    text: [
-      "txt",
-      "asc",
-    ],
-    textMedia: [
-      "docx",
-      "doc",
-      "wps",
-      "pdf",
-      "pages",
-      "rtf",
-      "md"
-    ],
-    code: [
-      "js",
-      "ts",
-      "py",
-      "html",
-      "css",
-      "lua",
-      "go",
-      "java",
-      "c",
-      "cpp",
-      "h",
-      "php",
-      "sql",
-      "ipy"
-    ],
-    disk: [
-      "dmg",
-      "iso"
-    ],
-    config: [
-      "dat",
-      "dll",
-      "editorconfig",
-      "eslintrc",
-      "conf",
-      "gitignore"
-    ],
-    data: [
-      "log",
-      "csv",
-      "json",
-      "sqlite",
-      "db"
-    ],
-    archive: [
-      "tar",
-      "gz",
-      "bz2",
-      "zip",
-      "rar"
-    ],
-    book: [
-      "epub",
-      "azw3",
-      "cbz"
-    ],
-    video: [
-      "mp4",
-      "m4v",
-      "m4p",
-      "mkv",
-      "mpv",
-      "mp2",
-      "mpg",
-      "mpeg",
-      "mov",
-      "qt",
-      "avi",
-      "wmv",
-      "webm",
-      "flv",
-      "swf",
-      "avchd",
-      "3gp",
-      "mpe"
-    ],
-    images: [
-      "png",
-      "jpg",
-      "jpeg",
-      "webp",
-      "gif",
-      "png",
-      "tiff",
-      "bmp",
-      "tmp",
-      "eps",
-      "svg",
-      "psd",
-      "raw",
-      "ai"
-    ],
-    sound: [
-      "ogg",
-      "asf",
-      "aiff",
-      "flac",
-      "alac",
-      "mid",
-      "midi",
-      "aac",
-      "acc",
-      "mp3",
-      "ac3",
-      "mp2",
-      "vqf",
-      "qt",
-      "waf",
-      "wav",
-      "ra",
-      "pcm",
-      "cda",
-      "wma"
-    ]
-  }
-
-  if (fileExtensions.text.some(ext => ext == fileExtension)) {
-    return "text.svg"
-  } else if (fileExtensions.textMedia.some(ext => ext == fileExtension)) {
-    return "textmedia.svg"
-  } else if (fileExtensions.code.some(ext => ext == fileExtension)) {
-    return "code.svg"
-  } else if (fileExtensions.disk.some(ext => ext == fileExtension)) {
-    return "disk.svg"
-  } else if (fileExtensions.config.some(ext => ext == fileExtension)) {
-    return "config.svg"
-  } else if (fileExtensions.data.some(ext => ext == fileExtension)) {
-    return "data.svg"
-  } else if (fileExtensions.archive.some(ext => ext == fileExtension)) {
-    return "archive.svg"
-  } else if (fileExtensions.book.some(ext => ext == fileExtension)) {
-    return "book.svg"
-  } else if (fileExtensions.video.some(ext => ext == fileExtension)) {
-    return "video.svg"
-  } else if (fileExtensions.images.some(ext => ext == fileExtension)) {
-    return "image.svg"
-  } else if (fileExtensions.sound.some(ext => ext == fileExtension)) {
-    return "sound.svg"
-  } else {
-    console.log(color.yellow("File extension not recognized:"), fileExtension)
-    return "file.svg"
-  }
-}
 
 app.listen(3000, () => console.log(`Server ready on port 3000`));
 
