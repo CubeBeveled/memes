@@ -20,6 +20,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 const githubLink = `<div class="bottom-container">
   <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg" class="bottom-icon"></a>
 </div>`;
+const memes = [];
 
 let memesHTML = ``;
 for (const category of await getContents(".")) {
@@ -42,6 +43,7 @@ for (const category of await getContents(".")) {
       else memeTypes.set(type, [{ category: category.name, name: meme.name }]);
 
       memeTypes.get("all").push({ category: category.name, name: meme.name })
+      memes.push(`${category.name}/${meme.name}`);
     }
 
 
@@ -81,4 +83,5 @@ ${memesHTML}
 
 ${analytics}`;
 
-fs.writeFileSync("index.html", html)
+fs.writeFileSync("index.html", html);
+fs.writeFileSync("memes.json", JSON.stringify(memes, null, 2));
