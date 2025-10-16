@@ -7,7 +7,7 @@ const header = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/assets/styles.css" />
+  <link rel="stylesheet" type="text/css" href="assets/styles.css" />
 
   <title>Meme explorer</title>
 </head>`;
@@ -18,7 +18,7 @@ window.va = window.va || function () { (window.vaq = window.vaq || []).push(argu
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="554afbee-8e2f-499c-98e9-47b3b7876f44"></script>`;
 const githubLink = `<div class="bottom-container">
-  <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="/assets/icons/github.svg" class="bottom-icon"></a>
+  <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="assets/icons/github.svg" class="bottom-icon"></a>
 </div>`;
 const memes = [];
 
@@ -30,7 +30,7 @@ for (const category of await getContents(".")) {
     const content = await getContents(category.name);
 
     memesHTML += `<div class="category">`; // Start a div
-    memesHTML += `<img src="/assets/icons/folder.svg" class="icon"> ${category.name}  <span class="dim-text">[ ${content.length} ]</span>`; // Label it
+    memesHTML += `<img src="assets/icons/folder.svg" class="icon"> ${category.name}  <span class="dim-text">[ ${content.length} ]</span>`; // Label it
 
     // Filter the memes by type
     const memeTypes = new Map();
@@ -47,14 +47,14 @@ for (const category of await getContents(".")) {
     }
 
 
-    //<a class="meme" target="_blank" href="/eng/!sex.mp4"><img src="/assets/icons/video.svg" class="icon">!sex<span class="dim-text">.mp4</span></a>
+    //<a class="meme" target="_blank" href="/eng/!sex.mp4"><img src="assets/icons/video.svg" class="icon">!sex<span class="dim-text">.mp4</span></a>
     memeTypes.forEach((memesList, type) => {
       memesHTML += `<details class="media-details">`; // Make a dropdown for the type
       memesHTML += `<summary class="media-summary">${type}</summary>`; // Label it
 
       memesList.forEach((meme) =>
         memesHTML += `<a class="meme" target="_blank" href="${meme.category}/${meme.name}">
-      <img src="/assets/icons/${getIcon(meme.name)}" class="icon">
+      <img src="assets/icons/${getIcon(meme.name)}" class="icon">
       ${getName(meme.name)}<span class="dim-text">.${getExtension(meme.name)}</span>
       </a>`
       )
