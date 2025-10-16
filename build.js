@@ -1,22 +1,14 @@
 import fs from "fs";
 import { getContents, ignoredDirs, getIcon, getExtension, getName } from './data.js';
 
-const header = `<!DOCTYPE html>
-<html lang="en">
-
-<head>
+const header = `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="assets/styles.css" />
 
-  <title>Meme explorer</title>
-</head>`;
+  <title>Meme explorer</title>`;
 
-const analytics = `<script>
-window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="554afbee-8e2f-499c-98e9-47b3b7876f44"></script>`;
+const analytics = `<script defer src="https://cloud.umami.is/script.js" data-website-id="5f22289a-d955-46ef-86e2-67ce2d393f14"></script>`;
 const githubLink = `<div class="bottom-container">
   <a href="https://github.com/CubeBeveled/memes" target="_blank"><img src="assets/icons/github.svg" class="bottom-icon"></a>
 </div>`;
