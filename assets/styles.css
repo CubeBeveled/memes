@@ -6,85 +6,78 @@ a {
 body {
   font-family: Arial, sans-serif;
   color: rgb(241, 241, 241);
-  background-color: rgb(33, 33, 33);
+  background-color: black;
+
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+}
+
+.outline {
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: gray;
+}
+
+.sidebar {
+  width: fit-content;
+  height: 100vh;
 }
 
 .category {
-  display: inline-block;
+  display: flex;
+  align-items: center;
 
-  vertical-align: top;
-  margin: 10px;
-  border-radius: 10px;
-
-  height: fit-content;
-}
-
-.media-details {
   cursor: pointer;
   user-select: none;
+
+  padding: 5px;
+
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-color: rgba(128, 128, 128, 0);
+  border-width: 1px;
+
+  transition: 0.2s;
 }
 
-.media-summary {
-  margin-left: 20px;
-  font-size: larger;
-  line-height: 130%;
-}
-
-.media-summary:hover {
-  font-weight: bold;
+.category:hover {
+  border-color: rgb(255, 255, 255);
 }
 
 .icon {
-  width: 2.5em;
-
-  margin: 5px;
-  padding: 0;
-  vertical-align: middle;
+  width: 2rem;
 }
 
-.bottom-container {
-  position: fixed;
+.content {
+  flex: 1;
+  display: grid;
 
-  bottom: 0;
-  right: 0;
+  grid-template-columns: repeat(auto-fit, 150px);
+  gap: 10px;
+}
 
-  margin: 10px;
-  padding: 10px;
+.content a {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
 
   border-radius: 10px;
-}
-
-.bottom-icon {
-  width: 2.5em;
-  margin: 0;
-  padding: 0;
-
-  vertical-align: middle;
-}
-
-.meme {
-  cursor: pointer;
-  display: block;
+  border-left-style: solid;
+  border-left-width: 0;
+  
   padding: 5px;
   margin: 10px;
-
-  width: fit-content;
-
-  border-radius: 10px;
-  border-left-color: #ffffff94;
-  border-left-style: solid;
-  border-left-width: 2px;
-
-  transition: border-left-color, 0.35s;
+  max-height: 3rem;
+  
+  transition: border-left-color, 0.2s;
 }
 
-.meme:hover {
+.content a:hover {
   border-left-color: #fff;
   background-color: rgba(117, 117, 117, 0.349);
-  border-left-width: 7px;
-  transform: translate(5px);
-}
-
-.dim-text {
-  color: rgb(167, 167, 167);
+  border-left-width: 0.3rem;
 }

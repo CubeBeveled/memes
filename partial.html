@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="assets/styles.css" />
+
+    <title>Meme explorer</title>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="sidebar outline" id="categories"></div>
+      <div class="content" id="content"></div>
+    </div>
+  </body>
+</html>
+<script>
+  const contentContainer = document.getElementById("content");
+  const categoriesContainer = document.getElementById("categories");
+  const categoryContent = memesjson
+
+  for (const key in categoryContent) {
+    const content = categoryContent[key];
+
+    // <div class="category">
+    //   <img src="assets/icons/folder.svg" class="icon" />
+    //   eng
+    // </div>
+
+    const categoryIcon = document.createElement("img");
+
+    categoryIcon.src = "assets/icons/folder.svg";
+    categoryIcon.classList.add("icon");
+
+    const categoryElement = document.createElement("div");
+    categoryElement.classList.add("category");
+
+    categoryElement.appendChild(categoryIcon);
+    categoryElement.append(key);
+
+    categoriesContainer.appendChild(categoryElement);
+
+    categoryElement.addEventListener("click", (ts, ev) => {
+      console.log("Displaying", key);
+      contentContainer.innerHTML = "";
+
+      for (const meme of content) {
+        const memeIcon = document.createElement("img");
+
+        memeIcon.src = meme.icon;
+        memeIcon.classList.add("icon");
+
+        const memeElement = document.createElement("a");
+        memeElement.href = meme.path;
+        memeElement.appendChild(memeIcon);
+        memeElement.append(meme.name);
+
+        contentContainer.appendChild(memeElement);
+      }
+    });
+  }
+</script>
+<script
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="5f22289a-d955-46ef-86e2-67ce2d393f14"
+></script>
