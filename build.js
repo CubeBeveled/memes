@@ -1,9 +1,5 @@
 import fs from "fs";
-import {
-  getContents,
-  ignoredDirs,
-  getIcon,
-} from "./utils.js";
+import { getContents, ignoredDirs, getIcon } from "./utils.js";
 
 const memes = {};
 let html = fs.readFileSync("partial.html").toString();

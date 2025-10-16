@@ -51,7 +51,7 @@ body {
 
 .icon {
   width: 2rem;
-  margin-right: 3px;
+  margin: 4px;
 }
 
 .content {
@@ -62,7 +62,8 @@ body {
   height: 100vh;
 
   grid-template-columns: repeat(auto-fit, 300px);
-  gap: 5px;
+  grid-template-rows: 50px 50px 50px;
+  gap: 0.5rem;
 }
 
 .content a {
@@ -73,11 +74,11 @@ body {
   border-radius: 10px;
   border-left-style: solid;
   border-left-width: 0;
-  
+
   padding: 5px;
   margin: 10px;
   max-height: 3rem;
-  
+
   transition: border-left-color, 0.2s;
 }
 
@@ -85,4 +86,8 @@ body {
   border-left-color: #fff;
   background-color: rgba(117, 117, 117, 0.349);
   border-left-width: 0.3rem;
+}
+
+.dim-text {
+  color: rgb(167, 167, 167);
 }

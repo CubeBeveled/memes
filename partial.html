@@ -46,6 +46,14 @@
       contentContainer.innerHTML = "";
 
       for (const meme of content) {
+        const split = meme.name.split(".");
+        const extension = split.pop();
+        const extensionless = split.join(".");
+
+        const dimExtension = document.createElement("span");
+        dimExtension.classList.add("dim-text");
+        dimExtension.append("." + extension);
+
         const memeIcon = document.createElement("img");
 
         memeIcon.src = meme.icon;
@@ -54,8 +62,10 @@
         const memeElement = document.createElement("a");
         memeElement.href = meme.path;
         memeElement.target = "_blank";
+
         memeElement.appendChild(memeIcon);
-        memeElement.append(meme.name);
+        memeElement.append(extensionless);
+        memeElement.appendChild(dimExtension);
 
         contentContainer.appendChild(memeElement);
       }
