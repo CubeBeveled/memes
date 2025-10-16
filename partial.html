@@ -18,7 +18,7 @@
 <script>
   const contentContainer = document.getElementById("content");
   const categoriesContainer = document.getElementById("categories");
-  const categoryContent = memesjson
+  const categoryContent = memesjson;
 
   for (const key in categoryContent) {
     const content = categoryContent[key];
@@ -53,6 +53,7 @@
 
         const memeElement = document.createElement("a");
         memeElement.href = meme.path;
+        memeElement.target = "_blank";
         memeElement.appendChild(memeIcon);
         memeElement.append(meme.name);
 

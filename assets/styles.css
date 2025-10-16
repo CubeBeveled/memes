@@ -25,6 +25,7 @@ body {
 .sidebar {
   width: fit-content;
   height: 100vh;
+  overflow: scroll;
 }
 
 .category {
@@ -50,14 +51,18 @@ body {
 
 .icon {
   width: 2rem;
+  margin-right: 3px;
 }
 
 .content {
   flex: 1;
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, 150px);
-  gap: 10px;
+  overflow: auto;
+  height: 100vh;
+
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 5px;
 }
 
 .content a {
