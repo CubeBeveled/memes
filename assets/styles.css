@@ -45,8 +45,28 @@ body {
   transition: 0.2s;
 }
 
+.category::after {
+  opacity: 0;
+  content: "›";
+  padding-left: 5px;
+}
+
+.category.selected {
+  background-color: rgba(117, 117, 117, 0.349);
+}
+
+.category.selected::after {
+  opacity: 1;
+}
+
 .category:hover {
   border-color: rgb(255, 255, 255);
+}
+
+.category:hover:after {
+  opacity: 1;
+  content: "›";
+  padding-left: 5px;
 }
 
 .icon {

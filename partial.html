@@ -45,6 +45,12 @@
       console.log("Displaying", key);
       contentContainer.innerHTML = "";
 
+      for (const category of categoriesContainer.children) {
+        category.classList.remove("selected");
+      }
+
+      categoryElement.classList.add("selected");
+
       for (const meme of content) {
         const split = meme.name.split(".");
         const extension = split.pop();
