@@ -28,9 +28,12 @@ body {
   overflow: scroll;
 }
 
-.search {
-  display:none;
+.search-container {
+  position: relative;
+  width: 100%;
+}
 
+#searchInput {
   box-sizing: border-box;
 
   height: 1.5rem;
@@ -43,8 +46,47 @@ body {
   color: white;
 }
 
-.search::placeholder {
+#searchInput::placeholder {
   color: rgb(109, 109, 109);
+}
+
+#searchSuggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  border: 1px solid rgba(174, 174, 174, 0.5);
+  border-top: none;
+  border-radius: 0.5rem;
+
+  max-height: 15rem;
+  overflow-y: auto;
+  z-index: 10;
+
+  display: none;
+  background-color: transparent;
+}
+
+#searchSuggestions a {
+  display: block;
+  padding: 10px;
+
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#searchSuggestions a:hover {
+  background-color: rgba(158, 158, 158, 0.5);
+}
+
+#searchSuggestions a .open {
+  opacity: 0;
+  margin-left: 0.5rem;
+}
+
+#searchSuggestions a:hover .open {
+  opacity: 1;
 }
 
 .content {
