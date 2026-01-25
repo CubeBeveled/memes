@@ -29,6 +29,8 @@ body {
 }
 
 .search {
+  display:none;
+
   box-sizing: border-box;
 
   height: 1.5rem;
