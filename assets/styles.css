@@ -98,25 +98,22 @@ body {
 }
 
 .memes {
-  display: grid;
-
   flex: 1;
   overflow-y: auto;
-
-  grid-template-columns: repeat(auto-fit, 300px);
-  grid-template-rows: 50px 50px 50px;
 }
 
 .memes a {
-  display: flex;
+  display: inline-flex;
   text-decoration: none;
   align-items: center;
 
   border-radius: 10px;
   border-left-style: solid;
-  border-left-width: 0;
+  border-left-width: 0.3rem;
+  border-left-color: #ffffff00;
 
-  padding: 5px;
+  min-width: 200px;
+  padding: 10px;
   margin: 10px;
   max-height: 3rem;
 
@@ -126,7 +123,6 @@ body {
 .memes a:hover {
   border-left-color: #fff;
   background-color: rgba(117, 117, 117, 0.349);
-  border-left-width: 0.3rem;
 }
 
 .category {
